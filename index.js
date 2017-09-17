@@ -19,9 +19,5 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 require('./routes/authRoutes')(app);
-
-///http://emaily-server.beninaction16.c9users.io/auth/google
-
-console.log(`I am listening PORT ${process.env.PORT}`)
-
-app.listen(process.env.PORT, process.env.IP);
+const PORT = process.env.PORT || 5000;
+app.listen(PORT);
