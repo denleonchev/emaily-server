@@ -1,5 +1,8 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { connect } from 'react-redux';
+
+import * as actions from '../actions';
 
 import Header from './Header'
 
@@ -13,9 +16,13 @@ const Landing = () => (
     <h2>Landing</h2>
 )
 
-const App = () => {
+class App extends Component {
+  componentDidMount() {
+    this.props.fetchUser();
+  }
+  render() {
     return (
-        <div>
+        <div className="container">
             <Router>
                 <div>
                     <Header />
@@ -26,6 +33,15 @@ const App = () => {
             </Router>
         </div>
     );
+  }
 }
 
-export default App;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    fetchUser: () => {
+      dispatch(actions.fetchUser());
+    }
+  }
+};
+
+export default connect(null, mapDispatchToProps)(App);
