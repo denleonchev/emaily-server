@@ -3,17 +3,14 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import * as actions from '../actions';
-
-import Header from './Header'
+import Header from './Header';
+import Landing from './Landing';
 
 const DashBoard = () => (
     <h2>DashBoard</h2>
 )
 const SurveyNew = () => (
     <h2>SurveyNew</h2>
-)
-const Landing = () => (
-    <h2>Landing</h2>
 )
 
 class App extends Component {
@@ -22,16 +19,14 @@ class App extends Component {
   }
   render() {
     return (
-        <div className="container">
-            <Router>
-                <div>
-                    <Header />
-                    <Route exact path="/" component={Landing} />
-                    <Route path="/serveys" component={DashBoard} />
-                    <Route path="/serveys/new" component={SurveyNew} />
-                </div>
-            </Router>
-        </div>
+      <Router>
+          <div className="container">
+              <Header />
+              <Route exact path="/" component={Landing} />
+              <Route path="/serveys" component={DashBoard} />
+              <Route path="/serveys/new" component={SurveyNew} />
+          </div>
+      </Router>
     );
   }
 }
