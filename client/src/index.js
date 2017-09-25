@@ -8,6 +8,10 @@ import thunk from 'redux-thunk';
 
 import App from './components/App';
 import reducers from './reducers';
+/* FOR TESTING */
+import axios from 'axios';
+window.axios = axios;
+/* FOR TESTING */
 
 const store = createStore(reducers, {}, applyMiddleware(...[thunk]));
 
