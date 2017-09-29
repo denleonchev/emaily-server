@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import StripeCheckout from 'react-stripe-checkout';
 import { connect } from 'react-redux';
+import Button from 'react-toolbox/lib/button/Button';
 
 import * as actions from '../actions';
 
@@ -14,10 +15,8 @@ class Payments extends Component {
         name="Emaily"
         description="$5 for 5 credits"
       >
-        <button className="btn">
-            Add credits
-        </button>
-      </StripeCheckout>   
+        <Button label="Add credits" raised />
+      </StripeCheckout>
     );
   }
 }

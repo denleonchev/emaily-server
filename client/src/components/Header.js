@@ -2,8 +2,10 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import AppBar from 'react-toolbox/lib/app_bar/AppBar';
+import Navigation from 'react-toolbox/lib/navigation/Navigation';
 import Button from 'react-toolbox/lib/button/Button';
 
+import './Header.css';
 import Payments from './Payments'
 
 class Header extends Component {
@@ -13,31 +15,28 @@ class Header extends Component {
           return;
         case false:
           return (
-            <Button label="Hello World!"/>
+            <Button href="/auth/google" label="Login with Google" raised />
           );
-      
         default:
           return [
-            <li key="1"><Payments /></li>,
-            <li key="2">
+            <span key="1"><Payments /></span>,
+            <span key="2">
               Credits: {this.props.auth.credits}
-            </li>,
-            <li key="3">
-              <a href="/api/logout">Logout</a>
-            </li>
+            </span>,
+            <Button href="/api/logout" label="Logout" raised />
           ];
       }
     }
     render() {
         return (
-            <nav className="nav-wrapper">
-              <Link to={this.props.auth ? '/serveys' : '/'} className=" brand-logo">
+          <AppBar className="red-bar">
+              <Link to={this.props.auth ? '/serveys' : '/'}>
                 Emaily
               </Link>
-              <ul className="right">
+              <Navigation type='horizontal'>
                 {this.renderContent()}
-              </ul>
-            </nav>
+              </Navigation>
+          </AppBar>
         )
     }
 }
