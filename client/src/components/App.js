@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import * as actions from '../actions';
 import Header from './Header';
 import Landing from './Landing';
+import Survey from './Survey'
 
 const DashBoard = () => (
     <h2>DashBoard</h2>
@@ -24,6 +25,15 @@ class App extends Component {
               <Header />
               <Route exact path="/" component={Landing} />
               <Route path="/serveys" component={DashBoard} />
+              <Route path="/survey"
+                render={() => (
+                  <Survey
+                      onSubmit={() => {
+                        console.log('Submit was handled');
+                      }}
+                  />
+                )}
+              />
               <Route path="/serveys/new" component={SurveyNew} />
           </div>
       </Router>

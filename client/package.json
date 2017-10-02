@@ -38,6 +38,8 @@
       "APP_BAR",
       "BUTTON",
       "DATE_PICKER",
+      "INPUT",
+      "CHECKBOX",
       "LINK",
       "NAVIGATION"
     ],

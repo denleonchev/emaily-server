@@ -1,3 +1,19 @@
 .red-bar {
   background-color: red;
 }
+
+.navigation {
+  flex: 1 0 0;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.credits {
+  line-height:  36px;
+  margin: 0 10px;
+}
+
+.logo {
+  font-size: 46px;
+  text-decoration: none;
+}
