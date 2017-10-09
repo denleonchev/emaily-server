@@ -8,6 +8,10 @@
   justify-content: flex-end;
 }
 
+.nav-buttons {
+  margin: 0 10px 0 0;
+}
+
 .credits {
   line-height:  36px;
   margin: 0 10px;

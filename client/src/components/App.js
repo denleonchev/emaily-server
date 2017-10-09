@@ -5,11 +5,9 @@ import { connect } from 'react-redux';
 import * as actions from '../actions';
 import Header from './Header';
 import Landing from './Landing';
-import Survey from './Survey'
+import Survey from './Survey';
+import Dashboard from './Dashboard';
 
-const DashBoard = () => (
-    <h2>DashBoard</h2>
-)
 const SurveyNew = () => (
     <h2>SurveyNew</h2>
 )
@@ -24,8 +22,8 @@ class App extends Component {
           <div className="container">
               <Header />
               <Route exact path="/" component={Landing} />
-              <Route path="/serveys" component={DashBoard} />
-              <Route path="/survey"
+              <Route exact path="/surveys" component={Dashboard} />
+              <Route exact path="/survey"
                 render={() => (
                   <Survey
                       onSubmit={() => {
@@ -34,7 +32,7 @@ class App extends Component {
                   />
                 )}
               />
-              <Route path="/serveys/new" component={SurveyNew} />
+              <Route exact path="/surveys/new" component={SurveyNew} />
           </div>
       </Router>
     );

@@ -20,6 +20,12 @@ class Header extends Component {
         default:
           return (
             <div>
+              <Link to="/surveys/new" className="nav-buttons">
+                <Button label="New Survey" raised />
+              </Link>
+              <Link to="/surveys" className="nav-buttons">
+                <Button label="Dashboard" raised />
+              </Link>
               <span key="1"><Payments /></span>
               <span key="2" className="credits">
                 Credits: {this.props.auth.credits}

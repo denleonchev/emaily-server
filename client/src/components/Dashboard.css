@@ -1,0 +1,13 @@
+.dashboard {
+  position: relative;
+}
+
+.dashboard-add {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+}
+
+  .dashboard-add button {
+    background-color: red !important;
+  }
