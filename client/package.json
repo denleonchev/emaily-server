@@ -41,7 +41,8 @@
       "INPUT",
       "CHECKBOX",
       "LINK",
-      "NAVIGATION"
+      "NAVIGATION",
+      "LIST"
     ],
     "customProperties": {
       "animation-duration": "0.3s",
