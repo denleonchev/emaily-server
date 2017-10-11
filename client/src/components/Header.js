@@ -38,7 +38,7 @@ class Header extends Component {
     render() {
         return (
           <AppBar className="red-bar">
-              <Link to={this.props.auth ? '/serveys' : '/'} className="logo">
+              <Link to={this.props.auth ? '/surveys' : '/'} className="logo">
                 Emaily
               </Link>
               <Navigation type='horizontal' className="navigation">

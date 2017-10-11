@@ -2,6 +2,7 @@ import React from 'react';
 import { Field, reduxForm } from 'redux-form';
 import Button from 'react-toolbox/lib/button/Button';
 
+import './NewSurveyForm.css';
 import emailsValidate from '../../utils/validateEmails';
 import fieldsConfig from './surveyConfig';
 
@@ -10,6 +11,9 @@ const validate = values => {
   const errors = {};
   if (!values.surveyTitle) {
     errors.surveyTitle = 'Required'
+  }
+  if (!values.subject) {
+    errors.subject = 'Required'
   }
   if (!values.recipients) {
     errors.recipients = 'Required';
@@ -26,7 +30,7 @@ const renderFields = (fields) => {
       {fields.map((field, index) => {
         const { name, component, label, type, multiline = false, rows = 1 } = field;
         return (
-          <Field key = { index }
+          <Field key = { name }
             name={ name }
             component={ component }
             label={ label }
@@ -45,12 +49,13 @@ const NewSurveyForm = (props) => {
   return(
     <form onSubmit={ handleSubmit }>
       <div>
-          { renderFields(fieldsConfig) }
-          <Button
-          label="Submit a survey"
+        { renderFields(fieldsConfig) }
+        <Button
+          label="Preview a survey"
           type="submit"
           raised
-          primary />
+          primary
+        />
       </div>
     </form>
   );

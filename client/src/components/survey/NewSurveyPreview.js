@@ -1,9 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router';
 import List from 'react-toolbox/lib/list/List';
 import ListItem from 'react-toolbox/lib/list/ListItem';
 import ListSubHeader from 'react-toolbox/lib/list/ListSubHeader';
+import Button from 'react-toolbox/lib/button/Button';
 
+import { submitSurvey } from '../../actions';
+import "./NewSurveyPreview.css";
 import surveyConfig from './surveyConfig';
 
 const displayValues = (fields) => {
@@ -13,11 +17,10 @@ const displayValues = (fields) => {
       return item.name === name;
     })
     const label = fieldConfig.label
-    console.log(field, label)
     return (
       <ListItem
         ripple={ false }
-        key={ index }
+        key={ name }
         caption={ label }
         legend={ value }
       />
@@ -26,13 +29,32 @@ const displayValues = (fields) => {
 }
 
 const NewSurveyPreview = (props) => {
-  const { formValues } = props;
+  const { formValues, cancelPreview, submitSurvey, history } = props;
+  console.log('formValues', formValues)
   const fields = Object.keys(formValues).map((key) => ({name: key, value: formValues[key]}))
-  console.log(fields)
   return(
     <List>
-      <ListSubHeader caption='Please revise the settings of the new survey' />
+      <ListSubHeader caption='Please revise the settings of the new survey and do accordingly' />
       { displayValues(fields) }
+      <Button
+        label="Edit a survey"
+        type="submit"
+        onClick={ cancelPreview }
+        className="new-survey-preview-button"
+        raised
+        accent
+      />
+      <Button
+        label="Submit a survey"
+        type="submit"
+        onClick={() => {
+          submitSurvey(formValues, history)
+          }
+        }
+        className="new-survey-preview-button"
+        raised
+        primary
+      />
     </List>
   );
 }
@@ -43,4 +65,12 @@ function mapStateToProps (state) {
   }
 }
 
-export default connect(mapStateToProps, null)(NewSurveyPreview)
+const mapDispatchToProps = (dispatch) => {
+  return {
+    submitSurvey: (data, history) => {
+          dispatch(submitSurvey(data, history));
+      }
+  }
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(NewSurveyPreview))

@@ -12,13 +12,20 @@ class Survey extends Component {
 
   render() {
     if (this.state.preview === true) {
-      return <NewSurveyPreview />;
+      return (
+        <NewSurveyPreview
+          cancelPreview={() => {
+            this.setState({preview: false})
+          }}
+        />
+      );
     } else {
       return (
-        <NewSurveyForm onSubmit={() => {
-          this.setState({preview: true})
-          console.log('Submit was handled');
-        }} />
+        <NewSurveyForm
+          onSubmit={() => {
+            this.setState({preview: true})
+          }}
+        />
       )
     }
   }

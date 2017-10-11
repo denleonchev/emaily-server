@@ -10,13 +10,13 @@ const renderField = ({ input, meta, ...props }) => (
 
 export default [
   {
-    name: "surveyTitle",
+    name: "title",
     component: renderField,
     label: "Survey title",
     type: "text"
   },
   {
-    name: "subjectLine",
+    name: "subject",
     component: renderField,
     label: "Subject line",
     type: "text"
