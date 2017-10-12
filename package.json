@@ -13,9 +13,7 @@
     "client": "npm start --prefix client",
     "dev": "concurrently \"npm run server\" \"npm run client\" \"npm run webhook\"",
     "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client",
-    "webhook": "run-script-os",
-    "webhook:win32": "forever sendgrid_webhook_windows.js",
-    "webhook:darwin:linux": "./sendgrid_webhook_linux.sh"
+    "webhook": "./sendgrid_webhook_linux.sh"
   },
   "repository": {
     "type": "git",
@@ -47,6 +45,6 @@
   },
   "devDependencies": {
     "forever": "^0.15.3",
-    "run-script-os": "^1.0.2"
+    "os-script": "1.0.0"
   }
 }
