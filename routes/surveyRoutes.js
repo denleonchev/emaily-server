@@ -36,21 +36,22 @@ module.exports = (app) => {
       });
 
       app.post('/api/surveys/webhooks', (req, res) => {
-        const events = req.body.map(({email, url}) => {
-          const pathname = new URL(url).pathname;
-          const p = new Path('/api/surveys/:surveyId/:choice');
-          const match = p.test(pathname);
-          if(match) {
-            return {
-              email,
-              surveyId: match.surveyId,
-              choice: match.choice
+        const events = _.chain(req.body)
+          .map(({email, url}) => {
+            const pathname = new URL(url).pathname;
+            const p = new Path('/api/surveys/:surveyId/:choice');
+            const match = p.test(pathname);
+            if(match) {
+              return {
+                email,
+                surveyId: match.surveyId,
+                choice: match.choice
+              }
             }
-          }
-        });
-        const compactEvents = events.filter((event) => (event));
-        const uniqueEvents = _.uniqBy(compactEvents, 'email', 'surveyId');
-        console.log('compactEvents', compactEvents);
-        console.log('uniqueEvents', uniqueEvents);
+          })
+          .compact()
+          .uniqBy('email', 'surveyId')
+          .value();
+        console.log('events', events);
       })
 };
