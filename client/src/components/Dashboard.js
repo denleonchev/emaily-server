@@ -48,6 +48,7 @@ class Dashboard extends Component {
   render() {
     return (
       <div className="dashboard">
+        <h2>Dashboard</h2>
         { this.renderTable() }
         <Link to="surveys/new" className="dashboard-add">
           <Button icon='add' className="dashboard-add-button" floating accent/>
