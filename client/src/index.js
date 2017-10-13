@@ -16,8 +16,8 @@ window.axios = axios;
 const store = createStore(reducers, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(), applyMiddleware(...[thunk]));
 
 ReactDom.render(
-    <Provider store={store}>
-      <ThemeProvider theme={theme}>
+    <Provider store={ store }>
+      <ThemeProvider theme={ theme }>
           <App />
       </ThemeProvider>
     </Provider>,

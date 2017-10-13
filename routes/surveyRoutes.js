@@ -34,6 +34,15 @@ module.exports = (app) => {
            res.status(422).send(err);
          }
       });
+      
+      app.get('/api/surveys', requireLogin, requireCredits, async (req, res) => {
+        const surveys = await Survey.find({_user: req.user}, {title: 1, subject: 1, dateSent: 1, no: 1, yes: 1});
+        res.send(surveys)
+      });
+
+      app.get('/api/surveys/:surveyId/:choice', (req, res) => {
+        res.send('Thanks for voting!');
+      });
 
       app.post('/api/surveys/webhooks', (req, res) => {
         _.chain(req.body)
@@ -60,8 +69,9 @@ module.exports = (app) => {
               }
             }, {
                 $inc: { [choice]: 1},
-                $set: { 'recipients.$.responded': true}
-            }).exec()
+                $set: { 'recipients.$.responded': true },
+                lastResponded: new Date()
+            }).exec();
           })
           .value();
       })

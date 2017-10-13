@@ -9,8 +9,8 @@ import fieldsConfig from './surveyConfig';
 
 const validate = values => {
   const errors = {};
-  if (!values.surveyTitle) {
-    errors.surveyTitle = 'Required'
+  if (!values.title) {
+    errors.title = 'Required'
   }
   if (!values.subject) {
     errors.subject = 'Required'
@@ -48,7 +48,7 @@ const NewSurveyForm = (props) => {
   const { handleSubmit } = props;
   return(
     <form onSubmit={ handleSubmit }>
-      <div>
+        <h2>Configure a new survey</h2>
         { renderFields(fieldsConfig) }
         <Button
           label="Preview a survey"
@@ -56,7 +56,6 @@ const NewSurveyForm = (props) => {
           raised
           primary
         />
-      </div>
     </form>
   );
 }

@@ -13,6 +13,7 @@
   "dependencies": {
     "axios": "^0.16.2",
     "materialize-css": "^0.100.2",
+    "moment": "^2.19.1",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
     "react-redux": "^5.0.6",
@@ -42,7 +43,8 @@
       "CHECKBOX",
       "LINK",
       "NAVIGATION",
-      "LIST"
+      "LIST",
+      "TABLE"
     ],
     "customProperties": {
       "animation-duration": "0.3s",

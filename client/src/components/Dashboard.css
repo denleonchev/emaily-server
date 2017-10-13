@@ -1,13 +1,18 @@
 .dashboard {
   position: relative;
+  min-height: 100px;
 }
 
 .dashboard-add {
   position: absolute;
-  bottom: 10px;
+  bottom: -70px;
   right: 10px;
 }
 
   .dashboard-add button {
     background-color: red !important;
+  }
+
+  .dashboard h2 {
+    font-family: Roboto,Helvetica,Arial,sans-serif;
   }
