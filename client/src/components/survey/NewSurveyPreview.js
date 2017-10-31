@@ -6,7 +6,7 @@ import ListItem from 'react-toolbox/lib/list/ListItem';
 import ListSubHeader from 'react-toolbox/lib/list/ListSubHeader';
 import Button from 'react-toolbox/lib/button/Button';
 
-import { submitSurvey } from '../../actions';
+import * as actions from '../../actions';
 import "./NewSurveyPreview.css";
 import surveyConfig from './surveyConfig';
 
@@ -65,12 +65,4 @@ function mapStateToProps (state) {
   }
 }
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    submitSurvey: (data, history) => {
-          dispatch(submitSurvey(data, history));
-      }
-  }
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(withRouter(NewSurveyPreview))
+export default connect(mapStateToProps, actions)(withRouter(NewSurveyPreview))

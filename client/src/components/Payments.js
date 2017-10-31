@@ -21,12 +21,4 @@ class Payments extends Component {
   }
 }
 
-function mapDispatchToProps(dispatch) {
-  return {
-    handleToken: (token) => {
-      dispatch(actions.handleToken(token));
-    }
-  }
-}
-
-export default connect(null, mapDispatchToProps)(Payments);
+export default connect(null, actions)(Payments);

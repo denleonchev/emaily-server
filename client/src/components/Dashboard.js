@@ -9,7 +9,7 @@ import Button from 'react-toolbox/lib/button/Button';
 import moment from 'moment';
 
 import './Dashboard.css';
-import { fetchSurveys } from '../actions';
+import * as actions from '../actions';
 
 class Dashboard extends Component {
   componentWillMount() {
@@ -64,12 +64,4 @@ function mapStateToProps (state) {
   }
 }
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    fetchSurveys: () => {
-          dispatch(fetchSurveys());
-      }
-  }
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);
+export default connect(mapStateToProps, actions)(Dashboard);
