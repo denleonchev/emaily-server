@@ -10,16 +10,26 @@ import moment from 'moment';
 
 import './Dashboard.css';
 import * as actions from '../actions';
+import requireAuth from './RequireAuth';
 
 class Dashboard extends Component {
   componentWillMount() {
-    this.props.fetchSurveys();
+    this.getSurveys();
+  }
+  componentWillReceiveProps(nextProps) {
+    if(this.props.auth !== nextProps.auth) {
+      this.getSurveys();
+    }
+  }
+  getSurveys() {
+    const { fetchSurveys } = this.props;
+    fetchSurveys();
   }
   renderTable () {
-   if (this.props.surveys === null) {
+    const { surveys } = this.props;
+    if (surveys === null) {
       return null;
-    } else if (this.props.surveys.length) {
-      const { surveys } = this.props;
+    } else if (surveys.length) {
       return (
         <Table selectable={ false }>
           <TableHead>
@@ -64,4 +74,4 @@ function mapStateToProps (state) {
   }
 }
 
-export default connect(mapStateToProps, actions)(Dashboard);
+export default requireAuth(connect(mapStateToProps, actions)(Dashboard));

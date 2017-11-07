@@ -11,7 +11,10 @@ export const fetchUser = () => async (dispatch) => {
   });
 }
 
-export const fetchSurveys = () => async (dispatch) => {
+export const fetchSurveys = () => async (dispatch, getState) => {
+  if(!getState().auth) {
+    return;
+  }
   const res = await axios.get('/api/surveys');
   dispatch({
     type: FETCH_SURVEYS,

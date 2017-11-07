@@ -1,0 +1,7 @@
+.menu-container {
+    display: flex;
+}
+
+.menu-chip {
+    align-self: center;
+}
