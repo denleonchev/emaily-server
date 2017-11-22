@@ -1,19 +1,15 @@
-import React from 'react';
-import FontIcon from 'material-ui/FontIcon';
-import RaisedButton from 'material-ui/RaisedButton';
-import VPNKey from 'material-ui/svg-icons/communication/vpn-key';
-
-const styles = {
-  marginTop: 5
-}
+import React from 'react'
+import RaisedButton from 'material-ui/RaisedButton'
+import VPNKey from 'material-ui/svg-icons/communication/vpn-key'
+import './GoogleLogin.css'
 
 const GoogleLogin = () => (
-    <RaisedButton
-      containerElement={<a href="/auth/google" />}
-      label="Sign in with Google"
-      icon={<VPNKey color="#00bcd4" />}
-      style={styles}
-    />
-);
+  <RaisedButton
+    className="header-google"
+    containerElement={<a href="/auth/google" />}
+    icon={<VPNKey color="#00bcd4" />}
+    label="Sign in with Google"
+  />
+)
 
-export default GoogleLogin;
+export default GoogleLogin

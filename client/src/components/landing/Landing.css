@@ -1,0 +1,54 @@
+.landing{
+position: relative;
+}
+
+.landing-banner {
+  width: 100%;
+}
+
+.landing-header-container {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  font-family: Roboto, Arial, sans-serif;
+  font-size: 56px;
+  color: #2D2D2D;
+}
+
+.slogan {
+  display: none;
+}
+
+.slogan-ready {
+  transform: rotate(15deg);
+  text-align: center;
+  display: block;
+}
+
+.slogan-enter {
+  opacity: 0.01;
+  transform: translateX(-100px) translateY(-25px) rotate(15deg);
+}
+
+.slogan-enter.slogan-enter-active {
+  opacity: 1;
+  transform: translateX(0) translateY(0) rotate(15deg);
+  transition: opacity 0.5s ease-in, transform 0.5s ease-in;
+}
+
+@media screen and (max-width: 900px) {
+  .landing-header-container {
+    font-size: 26px;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .landing-header-container {
+    font-size: 16px;
+  }
+}

@@ -1,14 +1,15 @@
-import React from 'react';
-import { Field, reduxForm } from 'redux-form';
-import Button from 'react-toolbox/lib/button/Button';
+import React from 'react'
+import { Field, reduxForm } from 'redux-form'
+import RaisedButton from 'material-ui/RaisedButton'
+import ArrowForward from 'material-ui/svg-icons/navigation/arrow-forward'
 
-import './NewSurveyForm.css';
-import emailsValidate from '../../utils/validateEmails';
-import fieldsConfig from './surveyConfig';
-
+import emailsValidate from '../../utils/validateEmails'
+import fieldsConfig from './surveyConfig'
+import './NewSurveyForm.css'
 
 const validate = values => {
-  const errors = {};
+  console.log('validating started')
+  const errors = {}
   if (!values.title) {
     errors.title = 'Required'
   }
@@ -16,28 +17,33 @@ const validate = values => {
     errors.subject = 'Required'
   }
   if (!values.recipients) {
-    errors.recipients = 'Required';
+    errors.recipients = 'Required'
   } else if (!emailsValidate(values.recipients)) {
     errors.recipients = 'Invalid email address'
   }
 
-  return errors;
+  console.log('errors', errors)
+  return errors
 }
 
 const renderFields = (fields) => {
   return (
     <div>
       {fields.map((field, index) => {
-        const { name, component, label, type, multiline = false, rows = 1 } = field;
+        const { component, floatingLabelText, hintText, multiLine = false, name, rows = 1, rowsMax = 1 } = field
         return (
-          <Field key = { name }
-            name={ name }
-            component={ component }
-            label={ label }
-            type={ type }
-            multiline={ multiline }
-            rows={ rows }
-          />
+          <div key = {name}>
+            <Field
+              className="new-survey-form-field"
+              component={component}
+              floatingLabelText={floatingLabelText}
+              hintText={hintText}
+              name={name}
+              multiLine={multiLine}
+              rows={rows}
+              rowsMax={rowsMax}
+            />
+          </div>
         )
       })}
     </div>
@@ -45,19 +51,22 @@ const renderFields = (fields) => {
 }
 
 const NewSurveyForm = (props) => {
-  const { handleSubmit } = props;
-  return(
-    <form onSubmit={ handleSubmit }>
-        <h2>Configure a new survey</h2>
-        { renderFields(fieldsConfig) }
-        <Button
-          label="Preview a survey"
-          type="submit"
-          raised
-          primary
-        />
+  const { handleSubmit } = props
+  return (
+    <form
+      className="new-survey-form"
+      onSubmit={handleSubmit}
+    >
+      <h2>Configure a new survey</h2>
+      {renderFields(fieldsConfig)}
+      <RaisedButton
+        icon={<ArrowForward color="#fff" />}
+        label="Preview your survey"
+        primary={true}
+        type="submit"
+      />
     </form>
-  );
+  )
 }
 
 export default reduxForm({

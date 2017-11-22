@@ -1,0 +1,10 @@
+{
+  "env": {
+    "browser": true,
+    "jest": true
+  },
+  "extends": "react",
+  "rules": {
+    "indent": ["error", 2]
+  }
+}

@@ -1,7 +1,13 @@
 .menu-container {
-    display: flex;
+  display: flex;
 }
 
 .menu-chip {
-    align-self: center;
+  align-self: center;
+}
+
+@media screen and (max-width: 500px) {
+  .menu-chip span {
+    font-size: 12px !important;
+  }
 }

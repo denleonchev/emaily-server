@@ -9,10 +9,16 @@
   right: 10px;
 }
 
-  .dashboard-add button {
-    background-color: red !important;
-  }
+.dashboard-add button {
+  background-color: red !important;
+}
 
-  .dashboard h2 {
-    font-family: Roboto,Helvetica,Arial,sans-serif;
-  }
+.dashboard h2 {
+  font-family: Roboto,Helvetica,Arial,sans-serif;
+  font-weight: 300;
+}
+
+.dashboard-table * {
+  white-space: normal !important;
+  overflow: visible !important;
+}

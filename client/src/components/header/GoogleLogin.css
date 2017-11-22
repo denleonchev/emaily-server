@@ -1,0 +1,9 @@
+.header-google {
+  margin-top: 5px;
+}
+
+@media screen and (max-width: 800px) {
+  .header-google span {
+    font-size: 12px !important;
+  }
+}

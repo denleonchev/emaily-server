@@ -1,29 +1,28 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 
 import NewSurveyForm from './NewSurveyForm'
-import NewSurveyPreview from './NewSurveyPreview';
-
+import NewSurveyPreview from './NewSurveyPreview'
 
 class Survey extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {preview: false};
+  constructor (props) {
+    super(props)
+    this.state = { preview: false }
   }
 
-  render() {
+  render () {
     if (this.state.preview === true) {
       return (
         <NewSurveyPreview
           cancelPreview={() => {
-            this.setState({preview: false})
+            this.setState({ preview: false })
           }}
         />
-      );
+      )
     } else {
       return (
         <NewSurveyForm
           onSubmit={() => {
-            this.setState({preview: true})
+            this.setState({ preview: true })
           }}
         />
       )
@@ -31,6 +30,4 @@ class Survey extends Component {
   }
 }
 
-
-
-export default Survey;
+export default Survey

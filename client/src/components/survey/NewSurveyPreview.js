@@ -1,62 +1,63 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import { withRouter } from 'react-router';
-import List from 'react-toolbox/lib/list/List';
-import ListItem from 'react-toolbox/lib/list/ListItem';
-import ListSubHeader from 'react-toolbox/lib/list/ListSubHeader';
-import Button from 'react-toolbox/lib/button/Button';
+import React from 'react'
+import { connect } from 'react-redux'
+import { withRouter } from 'react-router'
+import { List, ListItem } from 'material-ui/List'
+import RaisedButton from 'material-ui/RaisedButton'
+import Subheader from 'material-ui/Subheader'
 
-import * as actions from '../../actions';
-import "./NewSurveyPreview.css";
-import surveyConfig from './surveyConfig';
+import * as actions from '../../actions'
+import "./NewSurveyPreview.css"
+import surveyConfig from './surveyConfig'
 
 const displayValues = (fields) => {
   return fields.map((field, index) => {
-    const { name, value } = field;
+    const { name, value } = field
     const fieldConfig = surveyConfig.find((item) => {
-      return item.name === name;
+      return item.name === name
     })
-    const label = fieldConfig.label
+    const { Icon, floatingLabelText } = fieldConfig
     return (
       <ListItem
-        ripple={ false }
-        key={ name }
-        caption={ label }
-        legend={ value }
+        className="new-survey-preview-item"
+        key={name}
+        leftIcon={<Icon />}
+        primaryText={value}
+        secondaryText={floatingLabelText}
       />
     )
-  });
+  })
 }
 
 const NewSurveyPreview = (props) => {
-  const { formValues, cancelPreview, submitSurvey, history } = props;
+  const { formValues, cancelPreview, submitSurvey, history } = props
   console.log('formValues', formValues)
-  const fields = Object.keys(formValues).map((key) => ({name: key, value: formValues[key]}))
-  return(
-    <List>
-      <ListSubHeader caption='Please revise the settings of the new survey and do accordingly' />
-      { displayValues(fields) }
-      <Button
+  const fields = Object.keys(formValues).map((key) => ({ name: key, value: formValues[key] }))
+  return (
+    <List
+      className="new-survey-preview"
+    >
+      <Subheader
+        className="new-survey-preview-header"
+        inset={false}
+      >
+        Please revise the settings of the new survey and do accordingly
+      </Subheader>
+      {displayValues(fields)}
+      <RaisedButton
         label="Edit a survey"
-        type="submit"
-        onClick={ cancelPreview }
-        className="new-survey-preview-button"
-        raised
-        accent
+        onClick={cancelPreview}
+        primary={true}
       />
-      <Button
+      <RaisedButton
+        className="new-survey-preview-button"
         label="Submit a survey"
-        type="submit"
         onClick={() => {
           submitSurvey(formValues, history)
-          }
-        }
-        className="new-survey-preview-button"
-        raised
-        primary
+        }}
+        primary={true}
       />
     </List>
-  );
+  )
 }
 
 function mapStateToProps (state) {

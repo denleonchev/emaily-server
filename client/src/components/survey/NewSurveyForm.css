@@ -1,3 +1,12 @@
-input, textarea, h2 {
+.new-survey-form h2 {
   font-family: Roboto,Helvetica,Arial,sans-serif;
+  font-weight: 300;
+}
+
+.new-survey-form {
+  text-align: center
+}
+
+.new-survey-form-field {
+  text-align: left;
 }
