@@ -1,36 +1,17 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { withRouter } from 'react-router'
-import { List, ListItem } from 'material-ui/List'
+import { withRouter } from 'react-router-dom'
+
+import { List } from 'material-ui/List'
+import NewSurveyPreviewList from './NewSurveyPreviewList'
 import RaisedButton from 'material-ui/RaisedButton'
 import Subheader from 'material-ui/Subheader'
 
 import * as actions from '../../actions'
 import "./NewSurveyPreview.css"
-import surveyConfig from './surveyConfig'
-
-const displayValues = (fields) => {
-  return fields.map((field, index) => {
-    const { name, value } = field
-    const fieldConfig = surveyConfig.find((item) => {
-      return item.name === name
-    })
-    const { Icon, floatingLabelText } = fieldConfig
-    return (
-      <ListItem
-        className="new-survey-preview-item"
-        key={name}
-        leftIcon={<Icon />}
-        primaryText={value}
-        secondaryText={floatingLabelText}
-      />
-    )
-  })
-}
 
 const NewSurveyPreview = (props) => {
   const { formValues, cancelPreview, submitSurvey, history } = props
-  console.log('formValues', formValues)
   const fields = Object.keys(formValues).map((key) => ({ name: key, value: formValues[key] }))
   return (
     <List
@@ -42,7 +23,9 @@ const NewSurveyPreview = (props) => {
       >
         Please revise the settings of the new survey and do accordingly
       </Subheader>
-      {displayValues(fields)}
+      <NewSurveyPreviewList
+        fields={fields}
+      />
       <RaisedButton
         label="Edit a survey"
         onClick={cancelPreview}

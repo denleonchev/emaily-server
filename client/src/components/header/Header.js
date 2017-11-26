@@ -4,28 +4,10 @@ import AppBar from 'material-ui/AppBar'
 import CommunicationEmail from 'material-ui/svg-icons/communication/email'
 import IconButton from 'material-ui/IconButton'
 
-import GoogleLogin from './GoogleLogin'
-import Menu from './Menu'
+import NavigationContainer from './NavigationContainer'
 import './Header.css'
 
-const renderNavigation = (auth) => {
-  switch (auth) {
-  case null:
-    return null
-  case false:
-    return (
-      <GoogleLogin />
-    )
-  default:
-    return (
-      <Menu auth={auth} />
-    )
-  }
-}
-
-const Header = (props) => {
-  const { auth } = props
-
+const Header = () => {
   return (
     <AppBar
       className="header"
@@ -36,7 +18,9 @@ const Header = (props) => {
           <CommunicationEmail />
         </IconButton>
       }
-      iconElementRight={renderNavigation(auth)}
+      iconElementRight={
+        <NavigationContainer />
+      }
       title="Emaily!"
     />
   )

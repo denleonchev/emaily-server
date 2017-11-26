@@ -1,8 +1,11 @@
 import React, { Component } from 'react'
-import StripeCheckout from 'react-stripe-checkout'
 import { connect } from 'react-redux'
-import MenuItem from 'material-ui/MenuItem'
+
 import AttachMoney from 'material-ui/svg-icons/editor/attach-money'
+import MenuItem from 'material-ui/MenuItem'
+import StripeCheckout from 'react-stripe-checkout'
+
+import config from '../../config/keys'
 
 import * as actions from '../../actions'
 
@@ -12,7 +15,7 @@ class Payments extends Component {
       <StripeCheckout
         amount={500}
         token={(token) => { this.props.handleToken(token) }}
-        stripeKey={process.env.REACT_APP_STRIPE_KEY}
+        stripeKey={config.stripePublishableKey}
         name="Emaily"
         description="$5 for 5 credits"
       >

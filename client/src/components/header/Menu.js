@@ -14,10 +14,12 @@ import Payments from './Payments'
 
 const Menu = (props) => {
   const { auth } = props
+  const hasNoCredits = () => (auth && auth.credits === 0)
+
   return (
     <div className="menu-container">
       <Chip className="menu-chip">
-        You have {auth.credits} credits
+        {hasNoCredits() ? 'Buy credits for a survey!' : `You have ${auth.credits} credits`}
       </Chip>
       <IconMenu
         iconButtonElement={
@@ -35,7 +37,10 @@ const Menu = (props) => {
         </MenuItem>
         <MenuItem
           containerElement={<Link to="/surveys/new" />}
-          leftIcon={<AddCircle />}
+          disabled={hasNoCredits()}
+          leftIcon={
+            <AddCircle className={hasNoCredits() ? 'disabled' : ''} />
+          }
         >
           New Survey
         </MenuItem>

@@ -10,3 +10,7 @@
 .new-survey-form-field {
   text-align: left;
 }
+
+.new-survey-form-button {
+  margin: 5px;
+}

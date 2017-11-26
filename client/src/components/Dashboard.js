@@ -12,6 +12,7 @@ import {
 import moment from 'moment'
 
 import './Dashboard.css'
+import LoadingProgress from './LoadingProgress'
 import * as actions from '../actions'
 import requireAuth from './RequireAuth'
 
@@ -31,7 +32,9 @@ class Dashboard extends Component {
   renderTable () {
     const { surveys } = this.props
     if (surveys === null) {
-      return null
+      return (
+        <LoadingProgress />
+      )
     } else if (surveys.length) {
       return (
         <Table
@@ -76,9 +79,9 @@ class Dashboard extends Component {
       <div className="dashboard">
         <h2>Dashboard</h2>
         { this.renderTable() }
-        <Link to="surveys/new" className="dashboard-add">
-          {/* <Button icon="add" className="dashboard-add-button" floating accent/> */}
-        </Link>
+        {/* <Link to="surveys/new" className="dashboard-add">
+          <Button icon="add" className="dashboard-add-button" floating accent/>
+        </Link> */}
       </div>
     )
   }
