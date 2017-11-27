@@ -12,12 +12,13 @@ const Survey = mongoose.model('surveys')
 
 module.exports = (app) => {
   app.post('/api/surveys', requireLogin, requireCredits, async (req, res) => {
-    const { title, subject, body, recipients } = req.body
+    const { title, subject, body, recipients, answers } = req.body
     const survey = new Survey({
       title,
       subject,
       body,
       recipients: recipients.split(',').map((email) => ({ email })),
+      answers: answers.map((name) => ({ name })),
       _user: req.user.id,
       dateSent: Date.now()
     })
@@ -30,12 +31,23 @@ module.exports = (app) => {
       var user = await req.user.save()
       res.send(user)
     } catch (err) {
+      console.log(err)
       res.status(422).send(err)
     }
   })
 
   app.get('/api/surveys', requireLogin, async (req, res) => {
-    const surveys = await Survey.find({_user: req.user}, {title: 1, subject: 1, dateSent: 1, no: 1, yes: 1})
+    const { page = 1, search } = req.query
+    const recordsPerPage = 1
+    const surveysQuery = {_user: req.user}
+    if (search) {
+      surveysQuery.$text = {$search: search}
+    }
+    const surveys = await Survey.find(surveysQuery, {title: 1, subject: 1, dateSent: 1, answers: 1})
+      .sort({dateSent: 1})
+      .skip(recordsPerPage * (page - 1))
+      .limit(recordsPerPage)
+      .exec()
     res.send(surveys)
   })
 
@@ -64,9 +76,12 @@ module.exports = (app) => {
           _id: surveyId,
           recipients: {
             $elemMatch: { email: email, responded: false }
+          },
+          answers: {
+            $elemMatch: { name: choice }
           }
         }, {
-          $inc: { [choice]: 1 },
+          $inc: { 'answers.$.count': 1 },
           $set: { 'recipients.$.responded': true },
           lastResponded: new Date()
         }).exec()

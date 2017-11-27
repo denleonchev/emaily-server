@@ -1,5 +1,13 @@
 const keys = require('../../config/keys')
 
+const renderAnswers = (survey) => survey.answers.reduce((prev, curr) => {
+  return prev + `
+    <div>
+      <a href="${keys.redirectDomain}/api/surveys/${survey.id}/${curr.name}">${(curr.name)}</a>
+    </div>
+  `
+}, '')
+
 module.exports = (survey) => {
   return `
     <html>
@@ -7,12 +15,7 @@ module.exports = (survey) => {
         <h3>I'd like your input!</h3>
         <p>Please answer the following question:</p>
         <p>${survey.body}</p>
-        <div>
-          <a href="${keys.redirectDomain}/api/surveys/${survey.id}/yes">Yes</a>
-        </div>
-        <div>
-          <a href="${keys.redirectDomain}/api/surveys/${survey.id}/no">No</a>
-        </div>
+        ${renderAnswers(survey)}
       </body>
     </html>
   `
