@@ -1,7 +1,7 @@
 import axios from 'axios'
 import { reset } from 'redux-form'
 
-import { FETCH_USER, FETCH_SURVEYS } from './types'
+import { FETCH_USER, FETCH_SURVEYS, SET_SEARCH, IS_FETCHING_SURVEYS } from './types'
 
 export const fetchUser = () => async (dispatch) => {
   const res = await axios.get('/api/cur_user')
@@ -11,11 +11,16 @@ export const fetchUser = () => async (dispatch) => {
   })
 }
 
-export const fetchSurveys = () => async (dispatch, getState) => {
-  if (!getState().auth) {
-    return
-  }
-  const res = await axios.get('/api/surveys')
+export const fetchSurveys = (params) => async (dispatch, getState) => {
+  dispatch({
+    type: IS_FETCHING_SURVEYS,
+    payload: true
+  })
+  const res = await axios.get('/api/surveys', { params })
+  dispatch({
+    type: IS_FETCHING_SURVEYS,
+    payload: false
+  })
   dispatch({
     type: FETCH_SURVEYS,
     payload: res.data
@@ -39,3 +44,10 @@ export const submitSurvey = (surveyData, history) => async (dispatch) => {
   })
   dispatch(reset('newSurvey'))
 }
+
+export const setSearch = (value) => (
+  {
+    type: SET_SEARCH,
+    payload: value
+  }
+)

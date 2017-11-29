@@ -40,6 +40,7 @@ module.exports = (app) => {
     const { page = 1, search } = req.query
     const recordsPerPage = 1
     const surveysQuery = {_user: req.user}
+    console.log(req.query)
     if (search) {
       surveysQuery.$text = {$search: search}
     }
@@ -48,6 +49,8 @@ module.exports = (app) => {
       .skip(recordsPerPage * (page - 1))
       .limit(recordsPerPage)
       .exec()
+    console.log(search)
+    console.log(surveys)
     res.send(surveys)
   })
 

@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 import * as actions from '../actions'
 import Header from './header/Header'
 import Landing from './landing/Landing'
-import Dashboard from './Dashboard'
+import Dashboard from './dashboard/Dashboard'
 import NewSurveyContainer from './survey/NewSurveyContainer'
 
 class App extends Component {

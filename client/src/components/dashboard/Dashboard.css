@@ -17,8 +17,3 @@
   font-family: Roboto,Helvetica,Arial,sans-serif;
   font-weight: 300;
 }
-
-.dashboard-table * {
-  white-space: normal !important;
-  overflow: visible !important;
-}
