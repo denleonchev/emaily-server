@@ -38,20 +38,26 @@ module.exports = (app) => {
 
   app.get('/api/surveys', requireLogin, async (req, res) => {
     const { page = 1, search } = req.query
-    const recordsPerPage = 1
+    const recordsPerPage = 5
     const surveysQuery = {_user: req.user}
     console.log(req.query)
     if (search) {
       surveysQuery.$text = {$search: search}
     }
-    const surveys = await Survey.find(surveysQuery, {title: 1, subject: 1, dateSent: 1, answers: 1})
+    const items =  Survey.find(surveysQuery, {title: 1, subject: 1, dateSent: 1, answers: 1})
       .sort({dateSent: 1})
       .skip(recordsPerPage * (page - 1))
       .limit(recordsPerPage)
       .exec()
-    console.log(search)
-    console.log(surveys)
-    res.send(surveys)
+    const total =  Survey.find(surveysQuery, {title: 1, subject: 1, dateSent: 1, answers: 1})
+      .sort({dateSent: 1})
+      .count()
+      .exec()
+    const data = {
+      items: await items,
+      total: await total
+      }
+    res.send(data)
   })
 
   app.get('/api/surveys/:surveyId/:choice', async (req, res) => {

@@ -4,7 +4,7 @@ import authReducer from './authReducer'
 import surveysReducer from './surveysReducer'
 import searchReducer from './searchReducer'
 import fetchingSurveysReducer from './fetchingSurveysReducer'
-import surveysRefinedReducer from './surveysRefinedReducer'
+import initalFetchingSurveysReducer from './initalFetchingSurveysReducer'
 
 export default combineReducers({
   auth: authReducer,
@@ -12,5 +12,5 @@ export default combineReducers({
   form: reduxFormReducer,
   search: searchReducer,
   isFetchintSurveys: fetchingSurveysReducer,
-  areSuveysRefined: surveysRefinedReducer
+  initalFetchingSurveys: initalFetchingSurveysReducer
 })

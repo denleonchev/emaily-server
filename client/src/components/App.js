@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 import * as actions from '../actions'
 import Header from './header/Header'
 import Landing from './landing/Landing'
-import Dashboard from './dashboard/Dashboard'
+import DashboardContainer from './dashboard/DashboardContainer'
 import NewSurveyContainer from './survey/NewSurveyContainer'
 
 class App extends Component {
@@ -18,7 +18,7 @@ class App extends Component {
           <div className="container">
               <Header />
               <Route exact path="/" component={Landing} />
-              <Route exact path="/surveys" component={Dashboard} />
+              <Route exact path="/surveys" component={DashboardContainer} />
 
               <Route exact path="/surveys/new"
                 render={() => (

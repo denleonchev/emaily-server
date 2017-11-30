@@ -8,7 +8,7 @@ import SurveysTable from './SurveysTable'
 import * as actions from '../../actions'
 import requireAuth from '../RequireAuth'
 
-class Dashboard extends Component {
+class DashboardContainer extends Component {
   constructor (props) {
     super(props)
     this.getSurveys = this.getSurveys.bind(this)
@@ -28,29 +28,38 @@ class Dashboard extends Component {
     const { setSearch } = this.props
     setSearch(value)
   }
-  renderTable () {
-    const { surveys, search, isFetchintSurveys, areSuveysRefined } = this.props
-    if (isFetchintSurveys && !areSuveysRefined) {
+  renderLayout () {
+    const { items, search, isFetchintSurveys, initalFetchingSurveys } = this.props
+    if (initalFetchingSurveys && isFetchintSurveys) {
       return (
         <LoadingProgress />
       )
-    } else if (surveys.length || areSuveysRefined) {
+    } else if (initalFetchingSurveys && !items.length) {
+      return (
+        <h2>You have no surveys!</h2>
+      )
+    } else if ((initalFetchingSurveys && items.length > 1) || !initalFetchingSurveys) {
       return (
         <div>
           <Search
-            fetchSurveys={this.getSurveys}
+            getSurveys={this.getSurveys}
             setSearch={this.setSearch}
             search={search}
           />
           <SurveysTable
-            surveys={surveys}
+            surveys={items}
             isFetchintSurveys={isFetchintSurveys}
           />
         </div>
       )
     } else {
       return (
-        <h2>You have no surveys!</h2>
+        <div>
+          <SurveysTable
+            surveys={items}
+            isFetchintSurveys={isFetchintSurveys}
+          />
+      </div>
       )
     }
   }
@@ -58,7 +67,7 @@ class Dashboard extends Component {
     return (
       <div className="dashboard">
         <h2>Dashboard</h2>
-        { this.renderTable() }
+        { this.renderLayout() }
       </div>
     )
   }
@@ -66,11 +75,11 @@ class Dashboard extends Component {
 
 function mapStateToProps (state) {
   return {
-    surveys: state.surveys,
+    items: state.surveys.items,
     search: state.search,
     isFetchintSurveys: state.isFetchintSurveys,
-    areSuveysRefined: state.areSuveysRefined
+    initalFetchingSurveys: state.initalFetchingSurveys
   }
 }
 
-export default requireAuth(connect(mapStateToProps, actions)(Dashboard))
+export default requireAuth(connect(mapStateToProps, actions)(DashboardContainer))
