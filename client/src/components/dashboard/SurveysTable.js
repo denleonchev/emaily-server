@@ -13,11 +13,6 @@ import './SurveysTable.css'
 import LoadingProgress from './../LoadingProgress'
 
 const SurveysTable = ({ surveys, isFetchintSurveys }) => {
-  if (isFetchintSurveys) {
-    return (
-      <LoadingProgress />
-    )
-  }
   return (
     <div>
       <Table
@@ -32,14 +27,12 @@ const SurveysTable = ({ surveys, isFetchintSurveys }) => {
             <TableHeaderColumn>Title</TableHeaderColumn>
             <TableHeaderColumn>Subject</TableHeaderColumn>
             <TableHeaderColumn>Date Sent</TableHeaderColumn>
-            <TableHeaderColumn>Negative</TableHeaderColumn>
-            <TableHeaderColumn>Positive</TableHeaderColumn>
           </TableRow>
         </TableHeader>
         <TableBody
           displayRowCheckbox={false}
         >
-          {surveys.map((survey) => (
+          {!isFetchintSurveys ? surveys.map((survey) => (
             <TableRow key={survey._id}>
               <TableRowColumn>{survey.title}</TableRowColumn>
               <TableRowColumn>{survey.subject}</TableRowColumn>
@@ -47,9 +40,10 @@ const SurveysTable = ({ surveys, isFetchintSurveys }) => {
               <TableRowColumn>{survey.no}</TableRowColumn>
               <TableRowColumn>{survey.yes}</TableRowColumn>
             </TableRow>
-          ))}
+          )) : null}
         </TableBody>
       </Table>
+      {isFetchintSurveys ? <LoadingProgress /> : null}
     </div>
   )
 }

@@ -1,15 +1,5 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Link } from 'react-router-dom'
-import {
-  Table,
-  TableBody,
-  TableHeader,
-  TableHeaderColumn,
-  TableRow,
-  TableRowColumn
-} from 'material-ui/Table'
-import moment from 'moment'
 
 import './Dashboard.css'
 import LoadingProgress from './../LoadingProgress'
@@ -27,8 +17,8 @@ class Dashboard extends Component {
   componentWillMount () {
     this.getSurveys()
   }
-  componentWillUnmount() {
-    this.setSearch();
+  componentWillUnmount () {
+    this.setSearch()
   }
   getSurveys (params) {
     const { fetchSurveys } = this.props
@@ -39,15 +29,15 @@ class Dashboard extends Component {
     setSearch(value)
   }
   renderTable () {
-    const { surveys, setSearch, search, isFetchintSurveys } = this.props
-    if (surveys === null) {
+    const { surveys, search, isFetchintSurveys, areSuveysRefined } = this.props
+    if (isFetchintSurveys && !areSuveysRefined) {
       return (
         <LoadingProgress />
       )
-    } else if (surveys.length) {
+    } else if (surveys.length || areSuveysRefined) {
       return (
         <div>
-          <Search 
+          <Search
             fetchSurveys={this.getSurveys}
             setSearch={this.setSearch}
             search={search}
@@ -69,9 +59,6 @@ class Dashboard extends Component {
       <div className="dashboard">
         <h2>Dashboard</h2>
         { this.renderTable() }
-        {/* <Link to="surveys/new" className="dashboard-add">
-          <Button icon="add" className="dashboard-add-button" floating accent/>
-        </Link> */}
       </div>
     )
   }
@@ -81,7 +68,8 @@ function mapStateToProps (state) {
   return {
     surveys: state.surveys,
     search: state.search,
-    isFetchintSurveys: state.isFetchintSurveys
+    isFetchintSurveys: state.isFetchintSurveys,
+    areSuveysRefined: state.areSuveysRefined
   }
 }
 

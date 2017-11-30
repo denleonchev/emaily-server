@@ -1,8 +1,8 @@
-import { IS_FETCHING_SURVEYS } from '../actions/types'
+import { SET_IS_FETCHING_SURVEYS } from '../actions/types'
 
-export default function (state = false, action) {
+export default function (state = true, action) {
   switch (action.type) {
-  case IS_FETCHING_SURVEYS:
+  case SET_IS_FETCHING_SURVEYS:
     return action.payload
   default:
     return state
