@@ -11,12 +11,15 @@ import moment from 'moment'
 
 import './SurveysTable.css'
 import LoadingProgress from './../LoadingProgress'
+import Pagination from 'material-ui-pagination'
 
-const SurveysTable = ({ surveys, isFetchintSurveys }) => {
+const SurveysTable = ({ surveys, isFetchintSurveys, getSurveys }) => {
+  const { items, pages, page, search } = surveys
   return (
-    <div>
+    <div
+      className="dashboard-table"
+    >
       <Table
-        className="dashboard-table"
         selectable={false}
       >
         <TableHeader
@@ -32,18 +35,31 @@ const SurveysTable = ({ surveys, isFetchintSurveys }) => {
         <TableBody
           displayRowCheckbox={false}
         >
-          {!isFetchintSurveys ? surveys.map((survey) => (
-            <TableRow key={survey._id}>
-              <TableRowColumn>{survey.title}</TableRowColumn>
-              <TableRowColumn>{survey.subject}</TableRowColumn>
-              <TableRowColumn>{moment(survey.dateSent).format("MMMM Do YYYY, h:mm a")}</TableRowColumn>
-              <TableRowColumn>{survey.no}</TableRowColumn>
-              <TableRowColumn>{survey.yes}</TableRowColumn>
+          {!isFetchintSurveys ? items.map((item) => (
+            <TableRow key={item._id}>
+              <TableRowColumn>{item.title}</TableRowColumn>
+              <TableRowColumn>{item.subject}</TableRowColumn>
+              <TableRowColumn>{moment(item.dateSent).format("MMMM Do YYYY, h:mm a")}</TableRowColumn>
             </TableRow>
           )) : null}
         </TableBody>
       </Table>
       {isFetchintSurveys ? <LoadingProgress /> : null}
+      {pages > 1 ?
+        <Pagination
+          total={pages}
+          current={page}
+          display={5}
+          onChange={number => {getSurveys({ search, page: number })}}
+          className="dashboard-pagination"
+          styleRoot={{
+            position: 'fixed',
+            bottom: '5%',
+            width: '100%',
+            textAlign: 'center'
+          }}
+        />
+        : null}
     </div>
   )
 }

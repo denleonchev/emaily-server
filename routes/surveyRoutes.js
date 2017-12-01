@@ -37,26 +37,27 @@ module.exports = (app) => {
   })
 
   app.get('/api/surveys', requireLogin, async (req, res) => {
-    const { page = 1, search } = req.query
-    const recordsPerPage = 5
+    const { page = 1, recordsPerPage = 2, search = '' } = req.query
     const surveysQuery = {_user: req.user}
-    console.log(req.query)
     if (search) {
       surveysQuery.$text = {$search: search}
     }
-    const items =  Survey.find(surveysQuery, {title: 1, subject: 1, dateSent: 1, answers: 1})
+    const items = Survey.find(surveysQuery, {title: 1, subject: 1, dateSent: 1, answers: 1})
       .sort({dateSent: 1})
       .skip(recordsPerPage * (page - 1))
       .limit(recordsPerPage)
       .exec()
-    const total =  Survey.find(surveysQuery, {title: 1, subject: 1, dateSent: 1, answers: 1})
+    const totalSurveys = Survey.find(surveysQuery, {title: 1, subject: 1, dateSent: 1, answers: 1})
       .sort({dateSent: 1})
       .count()
       .exec()
     const data = {
       items: await items,
-      total: await total
-      }
+      pages: Math.ceil((await totalSurveys) / recordsPerPage),
+      search,
+      page: Number(page)
+    }
+    console.log(typeof page)
     res.send(data)
   })
 

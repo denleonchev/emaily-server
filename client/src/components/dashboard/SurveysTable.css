@@ -2,3 +2,7 @@
   white-space: normal !important;
   overflow: visible !important;
 }
+
+.dashboard-table {
+  margin-bottom: 10%;
+}

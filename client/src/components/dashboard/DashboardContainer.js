@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
-import './Dashboard.css'
+import './DashboardContainer.css'
 import LoadingProgress from './../LoadingProgress'
 import Search from './Search'
 import SurveysTable from './SurveysTable'
@@ -29,16 +29,16 @@ class DashboardContainer extends Component {
     setSearch(value)
   }
   renderLayout () {
-    const { items, search, isFetchintSurveys, initalFetchingSurveys } = this.props
+    const { surveys, search, isFetchintSurveys, initalFetchingSurveys } = this.props
     if (initalFetchingSurveys && isFetchintSurveys) {
       return (
         <LoadingProgress />
       )
-    } else if (initalFetchingSurveys && !items.length) {
+    } else if (initalFetchingSurveys && !surveys.items.length) {
       return (
         <h2>You have no surveys!</h2>
       )
-    } else if ((initalFetchingSurveys && items.length > 1) || !initalFetchingSurveys) {
+    } else if ((initalFetchingSurveys && surveys.items.length > 1) || !initalFetchingSurveys) {
       return (
         <div>
           <Search
@@ -47,8 +47,9 @@ class DashboardContainer extends Component {
             search={search}
           />
           <SurveysTable
-            surveys={items}
+            surveys={surveys}
             isFetchintSurveys={isFetchintSurveys}
+            getSurveys={this.getSurveys}
           />
         </div>
       )
@@ -56,10 +57,11 @@ class DashboardContainer extends Component {
       return (
         <div>
           <SurveysTable
-            surveys={items}
+            surveys={surveys}
             isFetchintSurveys={isFetchintSurveys}
+            getSurveys={this.getSurveys}
           />
-      </div>
+        </div>
       )
     }
   }
@@ -75,7 +77,7 @@ class DashboardContainer extends Component {
 
 function mapStateToProps (state) {
   return {
-    items: state.surveys.items,
+    surveys: state.surveys,
     search: state.search,
     isFetchintSurveys: state.isFetchintSurveys,
     initalFetchingSurveys: state.initalFetchingSurveys

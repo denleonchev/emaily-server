@@ -2,12 +2,13 @@ import { FETCH_SURVEYS } from '../actions/types'
 
 export default function (state = {
   items: [],
-  total: 0
+  pages: 0,
+  search: ''
 }, action) {
-    switch (action.type) {
-    case FETCH_SURVEYS:
-      return action.payload
-    default:
-      return state
+  switch (action.type) {
+  case FETCH_SURVEYS:
+    return action.payload
+  default:
+    return state
   }
 }
