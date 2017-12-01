@@ -8,6 +8,8 @@ import SurveysTable from './SurveysTable'
 import * as actions from '../../actions'
 import requireAuth from '../RequireAuth'
 
+import { getSelectedSurvey } from '../../reducers/index';
+
 class DashboardContainer extends Component {
   constructor (props) {
     super(props)
@@ -29,7 +31,7 @@ class DashboardContainer extends Component {
     setSearch(value)
   }
   renderLayout () {
-    const { surveys, search, isFetchintSurveys, initalFetchingSurveys } = this.props
+    const { surveys, search, isFetchintSurveys, initalFetchingSurveys, selectedSurvey, selectSurvey } = this.props
     if (initalFetchingSurveys && isFetchintSurveys) {
       return (
         <LoadingProgress />
@@ -50,6 +52,8 @@ class DashboardContainer extends Component {
             surveys={surveys}
             isFetchintSurveys={isFetchintSurveys}
             getSurveys={this.getSurveys}
+            selectedSurvey={selectedSurvey}
+            selectSurvey={selectSurvey}
           />
         </div>
       )
@@ -60,6 +64,8 @@ class DashboardContainer extends Component {
             surveys={surveys}
             isFetchintSurveys={isFetchintSurveys}
             getSurveys={this.getSurveys}
+            selectedSurvey={selectedSurvey}
+            selectSurvey={selectSurvey}
           />
         </div>
       )
@@ -80,7 +86,8 @@ function mapStateToProps (state) {
     surveys: state.surveys,
     search: state.search,
     isFetchintSurveys: state.isFetchintSurveys,
-    initalFetchingSurveys: state.initalFetchingSurveys
+    initalFetchingSurveys: state.initalFetchingSurveys,
+    selectedSurvey: getSelectedSurvey(state.surveys, state.selectedSurveyNumber)
   }
 }
 

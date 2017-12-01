@@ -1,7 +1,7 @@
 import axios from 'axios'
 import { reset } from 'redux-form'
 
-import { FETCH_USER, FETCH_SURVEYS, SET_SEARCH, SET_IS_FETCHING_SURVEYS, SET_INITIAL_FETCHING_SURVEYS } from './types'
+import { FETCH_USER, FETCH_SURVEYS, SET_SEARCH, SET_IS_FETCHING_SURVEYS, SET_INITIAL_FETCHING_SURVEYS, SELECT_SURVEY } from './types'
 
 export const fetchUser = () => async (dispatch) => {
   const res = await axios.get('/api/cur_user')
@@ -52,6 +52,13 @@ export const submitSurvey = (surveyData, history) => async (dispatch) => {
 export const setSearch = (value) => (
   {
     type: SET_SEARCH,
+    payload: value
+  }
+)
+
+export const selectSurvey = (value) => (
+  {
+    type: SELECT_SURVEY,
     payload: value
   }
 )

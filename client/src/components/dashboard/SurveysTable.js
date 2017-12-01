@@ -12,15 +12,15 @@ import moment from 'moment'
 import './SurveysTable.css'
 import LoadingProgress from './../LoadingProgress'
 import Pagination from 'material-ui-pagination'
+import SurveysGraph from './SurveysGraph'
 
-const SurveysTable = ({ surveys, isFetchintSurveys, getSurveys }) => {
-  const { items, pages, page, search } = surveys
+const SurveysTable = ({ surveys, isFetchintSurveys, getSurveys, selectedSurvey, selectSurvey }) => {
+  const { items, pages, page, search,  } = surveys
   return (
-    <div
-      className="dashboard-table"
-    >
+    <div className="dashboard-table">
       <Table
         selectable={false}
+        onCellClick={(rowNumber) => {selectSurvey(rowNumber)}}
       >
         <TableHeader
           adjustForCheckbox={false}
@@ -60,6 +60,10 @@ const SurveysTable = ({ surveys, isFetchintSurveys, getSurveys }) => {
           }}
         />
         : null}
+       <SurveysGraph
+          selectedSurvey = {selectedSurvey}
+          selectSurvey={selectSurvey}
+        />
     </div>
   )
 }

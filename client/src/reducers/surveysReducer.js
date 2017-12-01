@@ -1,6 +1,6 @@
 import { FETCH_SURVEYS } from '../actions/types'
 
-export default function (state = {
+function surveys (state = {
   items: [],
   pages: 0,
   search: ''
@@ -12,3 +12,7 @@ export default function (state = {
     return state
   }
 }
+
+export const getSelectedSurvey = (state, number) => (number === null ? null : state.items[number])
+
+export default surveys
