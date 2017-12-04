@@ -60,10 +60,12 @@ const SurveysTable = ({ surveys, isFetchintSurveys, getSurveys, selectedSurvey, 
           }}
         />
         : null}
-       <SurveysGraph
+       {selectedSurvey ?
+        <SurveysGraph
           selectedSurvey = {selectedSurvey}
           selectSurvey={selectSurvey}
         />
+        : null}
     </div>
   )
 }

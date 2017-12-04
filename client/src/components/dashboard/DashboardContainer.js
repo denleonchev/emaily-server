@@ -15,6 +15,7 @@ class DashboardContainer extends Component {
     super(props)
     this.getSurveys = this.getSurveys.bind(this)
     this.setSearch = this.setSearch.bind(this)
+    this.state = { search: '' }
   }
   componentWillMount () {
     this.getSurveys()
@@ -27,8 +28,7 @@ class DashboardContainer extends Component {
     fetchSurveys(params)
   }
   setSearch (value) {
-    const { setSearch } = this.props
-    setSearch(value)
+    this.setState({ search: value })
   }
   renderLayout () {
     const { surveys, search, isFetchintSurveys, initalFetchingSurveys, selectedSurvey, selectSurvey } = this.props
@@ -46,7 +46,7 @@ class DashboardContainer extends Component {
           <Search
             getSurveys={this.getSurveys}
             setSearch={this.setSearch}
-            search={search}
+            search={this.state.search}
           />
           <SurveysTable
             surveys={surveys}
