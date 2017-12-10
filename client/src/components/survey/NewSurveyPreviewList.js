@@ -17,7 +17,7 @@ const NewSurveyPreviewList = ({ fields }) => {
             className="new-survey-preview-item"
             key={name}
             leftIcon={<Icon />}
-            primaryText={value}
+            primaryText={Array.isArray(value) ? value.reduce((prev, curr) => prev + ' ' + curr, '') : value}
             secondaryText={floatingLabelText}
           />
         )

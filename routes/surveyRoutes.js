@@ -37,7 +37,7 @@ module.exports = (app) => {
   })
 
   app.get('/api/surveys', requireLogin, async (req, res) => {
-    const { page = 1, recordsPerPage = 2, search = '' } = req.query
+    const { page = 1, recordsPerPage = 5, search = '' } = req.query
     const surveysQuery = {_user: req.user}
     if (search) {
       surveysQuery.$text = {$search: search}
@@ -57,7 +57,6 @@ module.exports = (app) => {
       search,
       page: Number(page)
     }
-    console.log(typeof page)
     res.send(data)
   })
 
