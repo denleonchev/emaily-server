@@ -87,7 +87,7 @@ module.exports = (app) => {
             $elemMatch: { email: email, responded: false }
           },
           answers: {
-            $elemMatch: { name: choice }
+            $elemMatch: { name: decodeURIComponent(choice) }
           }
         }, {
           $inc: { 'answers.$.count': 1 },
