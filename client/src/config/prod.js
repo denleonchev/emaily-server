@@ -1,4 +1,3 @@
 module.exports = {
-  stripePublishableKey: process.env.STRIPE_PUBLISHABLE_KEY,
-  process: process.env
+  stripePublishableKey: process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY
 }
