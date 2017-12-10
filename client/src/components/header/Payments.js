@@ -8,7 +8,7 @@ import StripeCheckout from 'react-stripe-checkout'
 import config from '../../config/keys'
 
 import * as actions from '../../actions'
-
+console.log('process.env.STRIPE_PUBLISHABLE_KEY', process.env.STRIPE_PUBLISHABLE_KEY)
 console.log('config', config)
 class Payments extends Component {
   render () {
