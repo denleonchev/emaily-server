@@ -9,6 +9,7 @@ import config from '../../config/keys'
 
 import * as actions from '../../actions'
 
+console.log('config', config)
 class Payments extends Component {
   render () {
     return (
