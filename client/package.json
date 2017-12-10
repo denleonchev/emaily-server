@@ -35,35 +35,12 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject",
-    "toolbox": "react-toolbox-themr"
+    "eject": "react-scripts eject"
   },
   "devDependencies": {
     "babel-eslint": "^8.0.2",
     "eslint": "^4.11.0",
     "eslint-config-react": "^1.1.7",
-    "eslint-plugin-react": "^7.4.0",
-    "react-toolbox-themr": "^1.0.2"
-  },
-  "reactToolbox": {
-    "include": [
-      "APP_BAR",
-      "BUTTON",
-      "DATE_PICKER",
-      "INPUT",
-      "CHECKBOX",
-      "LINK",
-      "NAVIGATION",
-      "LIST",
-      "TABLE"
-    ],
-    "customProperties": {
-      "animation-duration": "0.3s",
-      "color-accent": "var(--palette-pink-a200)",
-      "color-accent-dark": "var(--palette-pink-700)",
-      "color-primary-contrast": "var(--color-dark-contrast)",
-      "color-accent-contrast": "var(--color-dark-contrast)"
-    },
-    "output": "src/assets/react-toolbox"
+    "eslint-plugin-react": "^7.4.0"
   }
 }
