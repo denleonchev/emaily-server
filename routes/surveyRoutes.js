@@ -67,6 +67,7 @@ module.exports = (app) => {
   app.post('/api/surveys/webhooks', (req, res) => {
     _.chain(req.body)
       .map(({email, url}) => {
+        console.log(url, email)
         const pathname = new URL(url).pathname
         const p = new Path('/api/surveys/:surveyId/:choice')
         const match = p.test(pathname)
