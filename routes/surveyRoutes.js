@@ -70,8 +70,8 @@ module.exports = (app) => {
         const pathname = new URL(url).pathname
         const p = new Path('/api/surveys/:surveyId/:choice')
         const match = p.test(pathname)
-        console.log(email, match.surveyId, match.choice)
         if (match) {
+          console.log(email, match.surveyId, match.choice)
           return {
             email,
             surveyId: match.surveyId,
